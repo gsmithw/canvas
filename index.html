@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drawing Area</title>
+<!-- You can add your style here rather than in an external style sheet. -->
+<style>
+	canvas {
+	    border:5px solid #d3d3d3;
+	    background-color: #f1f1f1;
+	    display: block;
+			/* width:80%;
+			height: 80%; */
+	}
+</style>
+</head>
+<body>
+    <!-- DO NOT MODIFY THIS HTML -->
+    <canvas id = "myCanvas" width = "350" height = "500"  ></canvas>
+    <input type = "color" id = "picker"/>
+
+		<script>
+
+		var canvas = document.querySelector("#myCanvas");
+
+		myCanvas.width = window.innerWidth*0.8;
+		myCanvas.height = window.innerHeight*0.8;
+		var color = "red";
+		var penDown = true;
+		picker = document.getElementById(picker)
+
+
+
+
+    function draw (posX,posY) {
+				if (penDown){
+				var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(posX,posY,10,0,2 * Math.PI);
+				ctx.fillStyle = color;
+        ctx.fill();
+			}
+    }
+
+    myCanvas.addEventListener(
+        'mousemove', function (e){
+            console.log(e.x);
+						console.log(e.y);
+						draw(e.x, e.y);
+
+
+        })
+    window.addEventListener(
+        'keydown',function(e){
+            console.log("KEYDOWN")
+							if (e.keyCode==66) {
+								console.log();
+								color="blue";
+
+							}
+							if (e.keyCode==71) {
+								color="green";
+
+							}
+							if (e.keyCode==89) {
+								color="yellow";
+
+							}
+							if (e.keyCode==82) {
+								color="red";
+
+							}
+
+							if (e.keyCode==38) {
+								penDown=false;
+
+							}
+							if (e.keyCode==40) {
+								penDown=true;
+
+							}
+
+							if (e.keyCode==32) {
+								console.log("clear");
+								var ctx = canvas.getContext("2d");
+								ctx.clearRect(0, 0, canvas.width, canvas.height);
+							}
+
+        })
+
+				// picker.addEventListener('change', function(e){
+				// 	color=this.value;
+				// })
+
+		</script>
+
+</body>
+</html>
